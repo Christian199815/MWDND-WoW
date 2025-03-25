@@ -1,0 +1,330 @@
+
+@layer StandardBoxes, CustomStyles;
+
+
+:root{
+    --aspect-ratio-v1: 16;
+    --apsect-ratio-v2: 9;
+
+
+    --d-width: 12em;
+    --d-height: 55em;
+  
+    --knob-width: 2em;
+    
+    --g-width: calc(var(--d-width) - 3em);
+    --g-height: 21em;
+
+    --board-color: green;
+
+
+    --w-width: 28em;
+    --w-height: 64em;
+    --border-size: 1em;
+    
+    --bp-width: calc(var(--w-width)  - calc(var(--border-size) * 2) - 2em);
+    --bp-height: calc(var(--w-height) - 75%);
+    
+    --sp-width: calc(var(--w-width) - 60%);
+    --sp-height: calc(var(--w-height) - 40%);
+}
+  #board{
+    width: 80em;
+    /* height: 20; */
+    aspect-ratio: 16 / 9;
+    
+    background-color: var(--board-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1.5em solid #9D5322;
+    border-style: outset;
+    border-color: #9D5322 #BA825F;
+  }
+
+  #board > svg path:hover{
+    fill: blue;
+  }
+
+  #board > svg{
+    transform: scale(2.2);
+  }
+
+
+  :root:has(#board > svg path:active){
+    body{
+        background-color: yellow;
+    }
+  }
+
+
+
+
+
+  /* #region Classroom box styling */
+  /* @keyframes {
+    from {
+    }
+    to {
+    }
+  } */
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+  
+    position: relative;
+    margin: 0;
+    background-color: #222;
+    font-family: Arial, sans-serif;
+    
+    overflow: hidden;
+  
+  }
+
+  @layer StandardBoxes {
+
+  body, body *{
+    transform-style: preserve-3d;
+  }
+  
+  div:first-of-type{
+    perspective: 1000px;
+    perspective-origin: center center;
+    
+    & div:nth-of-type(1){
+      
+    }
+  }
+  
+  
+  .box-container:nth-of-type(1){
+    --x-size: 100vw;
+    --y-size: 100dvh;
+    /* --y-size: calc(var(--x-size) * 0.5625); */
+    --z-size: 20em;
+    --hue: 220;
+
+    transform-origin: center center;
+  /*   transform: translateZ(20em) rotateX(-30deg) translateZ(20em); */
+  }
+  
+  .box {
+    width: var(--x-size);
+    height: var(--y-size);
+  
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: bottom center;
+  }
+  
+  .face {
+    position: absolute;
+    transform-style: preserve-3d;
+    background-color: hsl(var(--hue), 100%, var(--lightness));
+    opacity: .6;
+  }
+  
+  
+  
+  .face.front,
+  .face.back {
+    width: var(--x-size);
+    height: var(--y-size);
+  }
+  
+  .face.bottom,
+  .face.top {
+    width: var(--x-size);
+    height: var(--z-size);
+  }
+  
+  /* Side faces should match the depth */
+  .face.left,
+  .face.right {
+    width: var(--z-size);
+    height: var(--y-size);
+  }
+  
+  .face.front {
+    --lightness: 66%;
+    display: none;
+  }
+  
+  .face.back {
+    transform-origin: center bottom;
+  
+    transform: rotateX(180deg) translateZ(var(--z-size))  rotateX(180deg);
+    --lightness: 62%;
+    
+    
+  }
+  
+  .face.bottom {
+    bottom: 0;
+    transform-origin: bottom;
+    transform: rotateX(-90deg) translateY(var(--z-size));
+    --lightness: 72%;
+    
+  }
+  
+  .face.top {
+    bottom: 100%;
+    transform-origin: bottom;
+    transform: rotateX(90deg);
+    --lightness: 74%;
+    
+  }
+  
+  .face.right {
+    left: var(--x-size);
+    bottom: 0;
+    transform-origin: left bottom;
+    transform: rotateY(90deg);
+    --lightness: 70%;
+  }
+  
+  .face.left {
+    right: var(--x-size);
+    bottom: 0;
+    transform-origin: right bottom;
+    transform: rotateY(-90deg);
+    --lightness: 70%;
+    /* background-image: url("doc-images/box1.png"); */
+  }
+  
+  /* Add display flex to top face to center joystick */
+  .face.top {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }
+}
+  
+
+
+  .door {
+    width: var(--d-width);
+    height: var(--d-height);
+  
+    background-color: #AA6639;
+  
+    position: absolute;
+    bottom: 0;
+    right: 20%;
+  }
+  
+  
+  .knob {
+    border-radius: 100%;
+    width: var(--knob-width);
+    aspect-ratio: 1;
+  
+    background-color: yellow;
+  
+    position: absolute;
+    top: calc((var(--d-height) / 2) - (var(--knob-width) / 2));
+    left: 10px;
+    
+    box-shadow: 0px 0px 6px 4px green;
+    
+  }
+  
+  .glass{
+  width: var(--g-width);
+    height: var(--g-height);
+    
+    background-image: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
+    
+    position: absolute;
+    left: calc((var(--d-width) / 2) - (var(--g-width) / 2));
+    top: calc((var(--d-height) / 4) - (var(--g-height) / 2));
+    
+     border: .5em solid #9D5322;
+    border-style: outset;
+    border-color: #9D5322 #BA825F;
+  }
+  
+  .panel{
+    width: var(--g-width);
+    height: var(--g-height);
+    
+    background-color: maroon;
+    
+    position: absolute;
+    left: calc((var(--d-width) / 2) - (var(--g-width) / 2));
+    bottom: calc((var(--d-height) / 4) - (var(--g-height) / 2));
+    
+    border: .5em solid #9D5322;
+    border-style: outset;
+    border-color: #9D5322 #BA825F;
+  }
+  
+
+
+  .window{
+    position: relative;
+    width: var(--w-width);
+    height: var(--w-height);
+    
+    background-color: white;
+    
+  }
+  
+  .bigPane{
+    position: absolute;
+  width: var(--bp-width);
+    height: var(--bp-height);
+    left: calc(var(--border-size));
+    top: 2.5%;
+    
+    background-image: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
+    
+      border: 1em solid #FAFAFA;
+    border-style: outset;
+    border-color: #FAFAFA #F4F4F4;
+  }
+  
+  .smallPane{
+    position: absolute;
+    width: var(--sp-width);
+    height: var(--sp-height);
+    
+    bottom: 2.5%;
+    
+     background-image: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
+      border: 1em solid #9D5322;
+    border-style: outset;
+    border-color: #FAFAFA #F4F4F4;
+  }
+  
+  .window div:nth-child(2)){
+    left: var(--border-size);
+  }
+  
+  .window div:nth-child(3){
+      right: var(--border-size);
+  }
+
+
+@layer CustomStyles{
+
+
+    .face.back{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .face.bottom{
+        background-color: teal;
+    }
+}
+
+
+  
