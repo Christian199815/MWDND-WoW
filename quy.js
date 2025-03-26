@@ -22,7 +22,7 @@ fetch(baseURL + endpoint)
     const periodButtons = document.querySelectorAll('.menu-items .item button');
     const menuToggleButton = document.querySelector('.menu-toggle');
     const continentButtons = document.querySelectorAll('#board button');
-    const popover = document.getElementById('continent-popover');
+    const popoverMenu = document.getElementById('menu-items');
 
     // Standaardtekst instellen menu button
     menuToggleButton.textContent = "All periods";
@@ -79,20 +79,21 @@ fetch(baseURL + endpoint)
 
     // Event listeners voor period-buttons
     periodButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        selectedPeriod = e.target.innerText.trim();
-        menuToggleButton.textContent = selectedPeriod; // Update de menu-toggle button tekst
-        filterData();
+        button.addEventListener('click', (e) => {
+          selectedPeriod = e.target.innerText.trim();
+          menuToggleButton.textContent = selectedPeriod;
+          popoverMenu.hidePopover();
+          filterData();
+        });
       });
-    });
 
     // Event listeners voor continent-buttons
     continentButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        selectedContinent = e.target.textContent.trim();
-        filterData();
+        button.addEventListener('click', (e) => {
+          selectedContinent = e.target.getAttribute('data-continent').trim();
+          filterData();
+        });
       });
-    });
 
     displayCards(WomenInTech);
   });

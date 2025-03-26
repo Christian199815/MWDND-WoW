@@ -35,7 +35,7 @@ html{
   --radius: calc(var(--btn-size) + var(--extra-space));
   background-color: var(--bg);
   transform: translateX(calc(cos(var(--angle)) * var(--radius)))
-		         translateY(calc(sin(var(--angle) * -1) * var(--radius)))
+             translateY(calc(sin(var(--angle) * -1) * var(--radius)))
              rotate(0deg);
   opacity: 0;
   transition: all 0.6s var(--delay) ease;
@@ -97,33 +97,31 @@ html{
 
 .item:nth-child(2) {
   --bg: thistle;
-  --angle: calc(1*60deg);
+  --angle: calc(1*72deg);
   --delay: 0s;
 }
 
 .item:nth-child(3) {
   --bg:	paleturquoise;
-  --angle: calc(2*60deg);
+  --angle: calc(2*72deg);
   --delay: 0s;
 }
 
 .item:nth-child(4) {
   --bg: lightgreen;
-  --angle: calc(3*60deg);
+  --angle: calc(3*72deg);
   --delay: 0s;
 }
 
 .item:nth-child(5) {
   --bg: peachpuff;
-  --angle: calc(4*60deg);
+  --angle: calc(4*72deg);
   --delay: 0s;
 }
 
 .item:nth-child(6) {
-  --bg: cyan;
-  --angle: calc(5*60deg);
-  --delay: 0s;
-}
+    --bg: darksalmon;
+  }
 
 /* Grid piles */
 
