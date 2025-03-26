@@ -18,7 +18,7 @@ fetch(baseURL + endpoint)
   .then(response => response.json())
   .then(data => {
     const WomenInTech = data.data;
-    const container = document.getElementById('cards-container');
+    const container = document.getElementById('slider');
     const periodButtons = document.querySelectorAll('.menu-items .item button');
     const menuToggleButton = document.querySelector('.menu p');
     const continentButtons = document.querySelectorAll('#board button');
@@ -45,17 +45,20 @@ fetch(baseURL + endpoint)
     // Kaarten weergeven
     const displayCards = (filteredData) => {
       container.innerHTML = filteredData.map(person => `
-                <div class="card">
-                    <img src="https://fdnd.directus.app/assets/${person.image}" alt="${person.name}">
-                    <h2>${person.name}</h2>
-                    <p>${person.tagline}</p>
-                    <p>Period: ${person.period}</p>
-                    <p>Country: ${person.country}</p>
-                    <p>Continent: ${person.continent}</p>
-                    <a href="${person.website}" target="_blank">Website</a>
-                    ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
-                    ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
-                </div>
+                <li class="card">
+                    <div>
+                        <img src="https://fdnd.directus.app/assets/${person.image}" alt="${person.name}">
+                        <h2>${person.name}</h2>
+                        <p>"${person.tagline}"</p>
+                        <p>Period: ${person.period}</p>
+                        <p>Based: ${person.country}</p>
+                        <div>
+                        <a href="${person.website}" target="_blank">Website</a>
+                        ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
+                        ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
+                        </div>
+                    <div>
+                </li>
             `).join('');
     };
 
