@@ -6,32 +6,52 @@
     --aspect-ratio-v1: 16;
     --apsect-ratio-v2: 9;
 
+    --board-width: 70dvw;
+    --board-height: calc(var(--board-width) * 0.5625);
 
-    --d-width: 12em;
-    --d-height: 55em;
+    --door-width: 12em;
+    --door-height: calc(100dvh - 20%);
   
-    --knob-width: 2em;
+    --knob-width: 1em;
     
-    --g-width: calc(var(--d-width) - 3em);
-    --g-height: 21em;
+    --glass-width: calc(var(--door-width) - 3em);
+    --glass-height: calc(var(--door-height) - 70%);
+
+    --continent-hover: yellow;
 
     --board-color: green;
+    --board-border-1: #9D5322;
+    --board-border-2: #BA825F;
+    --classroom-walls: #F5F5DC;
+    --classroom-floor: #E2D443;
+    --classroom-ceiling: #E0E0E0;
+
+    --knob-color: yellow;
+    --knob-boxShadow-color: green;
+
+    --door-color: #AA6639;
+    --panel-color: maroon;
+
+    --glass-gradient: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
+    --glass-border-1: #fafafa;
+    --glass-border-2: #f4f4f4;
 
 
-    --w-width: 28em;
-    --w-height: 64em;
-    --border-size: 1em;
+
+    --window-width: 28em;
+    --window-height: calc(100dvh - 20%);
+    --window-border-size: 1em;
     
-    --bp-width: calc(var(--w-width)  - calc(var(--border-size) * 2) - 2em);
-    --bp-height: calc(var(--w-height) - 75%);
+    --bigPane-width: calc(var(--window-width)  - calc(var(--window-border-size) * 2) - 2em);
+    --bigPane-height: calc(var(--window-height) - 75%);
     
-    --sp-width: calc(var(--w-width) - 60%);
-    --sp-height: calc(var(--w-height) - 40%);
+    --smallPane-width: calc(var(--window-width) - 60%);
+    --smallPane-height: calc(var(--window-height) - 50%);
 }
   #board{
-    width: 80em;
-    /* height: 20; */
-    aspect-ratio: 16 / 9;
+    width: var(--board-width);
+    height: var(--board-height);
+
     
     background-color: var(--board-color);
 
@@ -39,17 +59,23 @@
     justify-content: center;
     align-items: center;
 
-    border: 1.5em solid #9D5322;
+    border: 1.5em solid var(--board-border-1);
     border-style: outset;
-    border-color: #9D5322 #BA825F;
+    border-color: var(--board-border-1) var(--board-border-2) ;
+    position: relative;
+
   }
 
   #board > svg path:hover{
-    fill: blue;
+    fill: var(--continent-hover);
+    
   }
 
   #board > svg{
-    transform: scale(2.2);
+    width: 110%;
+    height: 110%;
+    position: absolute;
+    bottom: calc((var(--board-height) - 90%) * -1);
   }
 
 
@@ -59,17 +85,6 @@
     }
   }
 
-
-
-
-
-  /* #region Classroom box styling */
-  /* @keyframes {
-    from {
-    }
-    to {
-    }
-  } */
   
   body {
     display: flex;
@@ -96,9 +111,6 @@
     perspective: 1000px;
     perspective-origin: center center;
     
-    & div:nth-of-type(1){
-      
-    }
   }
   
   
@@ -208,10 +220,10 @@
 
 
   .door {
-    width: var(--d-width);
-    height: var(--d-height);
+    width: var(--door-width);
+    height: var(--door-height);
   
-    background-color: #AA6639;
+    background-color: var(--door-color);
   
     position: absolute;
     bottom: 0;
@@ -224,52 +236,52 @@
     width: var(--knob-width);
     aspect-ratio: 1;
   
-    background-color: yellow;
+    background-color: var(--knob-color);
   
     position: absolute;
-    top: calc((var(--d-height) / 2) - (var(--knob-width) / 2));
+    top: calc((var(--door-height) / 2) - (var(--knob-width) / 2));
     left: 10px;
     
-    box-shadow: 0px 0px 6px 4px green;
+    box-shadow: 0px 0px 6px 4px var(--knob-boxShadow-color);
     
   }
   
   .glass{
-  width: var(--g-width);
-    height: var(--g-height);
+  width: var(--glass-width);
+    height: var(--glass-height);
     
-    background-image: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
+    background-image: var(--glass-gradient);
     
     position: absolute;
-    left: calc((var(--d-width) / 2) - (var(--g-width) / 2));
-    top: calc((var(--d-height) / 4) - (var(--g-height) / 2));
+    left: calc((var(--door-width) / 2) - (var(--glass-width) / 2));
+    top: calc((var(--door-height) / 4) - (var(--glass-height) / 2));
     
-     border: .5em solid #9D5322;
+     border: .5em solid var(--board-border-1);
     border-style: outset;
-    border-color: #9D5322 #BA825F;
+    border-color: var(--board-border-1) var(--board-border-2);
   }
   
   .panel{
-    width: var(--g-width);
-    height: var(--g-height);
+    width: var(--glass-width);
+    height: var(--glass-height);
     
-    background-color: maroon;
+    background-color: var(--panel-color);
     
     position: absolute;
-    left: calc((var(--d-width) / 2) - (var(--g-width) / 2));
-    bottom: calc((var(--d-height) / 4) - (var(--g-height) / 2));
+    left: calc((var(--door-width) / 2) - (var(--glass-width) / 2));
+    bottom: calc((var(--door-height) / 4) - (var(--glass-height) / 2));
     
-    border: .5em solid #9D5322;
+    border: .5em solid var(--board-border-1);
     border-style: outset;
-    border-color: #9D5322 #BA825F;
+    border-color: var(--board-border-1) var(--board-border-2);
   }
   
 
 
   .window{
     position: relative;
-    width: var(--w-width);
-    height: var(--w-height);
+    width: var(--window-width);
+    height: var(--window-height);
     
     background-color: white;
     
@@ -277,29 +289,30 @@
   
   .bigPane{
     position: absolute;
-  width: var(--bp-width);
-    height: var(--bp-height);
-    left: calc(var(--border-size));
+  width: var(--bigPane-width);
+    height: var(--bigPane-height);
+    left: calc(var(--window-border-size));
     top: 2.5%;
     
-    background-image: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
+    background-image: var(--glass-gradient);
     
-      border: 1em solid #FAFAFA;
+      border: 1em solid var(--glass-border-1);
     border-style: outset;
-    border-color: #FAFAFA #F4F4F4;
+    border-color: var(--glass-border-1) var(--glass-border-2);
   }
   
   .smallPane{
     position: absolute;
-    width: var(--sp-width);
-    height: var(--sp-height);
+    width: var(--smallPane-width);
+    height: var(--smallPane-height);
     
     bottom: 2.5%;
     
-     background-image: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
-      border: 1em solid #9D5322;
-    border-style: outset;
-    border-color: #FAFAFA #F4F4F4;
+     background-image: var(--glass-gradient);
+
+     border: 1em solid var(--glass-border-1);
+     border-style: outset;
+     border-color: var(--glass-border-1) var(--glass-border-2);
   }
   
   .window div:nth-child(2)){
@@ -307,12 +320,14 @@
   }
   
   .window div:nth-child(3){
-      right: var(--border-size);
+      right: var(--window-border-size);
   }
 
 
 @layer CustomStyles{
-
+    .face{
+        background-color: var(--classroom-walls);
+    }
 
     .face.back{
         display: flex;
@@ -320,9 +335,12 @@
         align-items: center;
     }
 
+    .face.top{
+        background-color: var(--classroom-ceiling);
+    }
 
     .face.bottom{
-        background-color: teal;
+        background-color: var(--classroom-floor);
     }
 }
 
