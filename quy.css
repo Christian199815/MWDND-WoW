@@ -115,9 +115,37 @@ html {
     --angle: calc(4*72deg);
     --delay: 0s;
 }
+.item:nth-child(6) p{
+    font-size: 1rem;
+    transform: translateY(1rem); 
+}
 
 .item:nth-child(6) {
-    --bg: darksalmon;
+    font-size:medium;
+    background-image:
+     radial-gradient(
+        farthest-side circle,
+        #000 8%,
+        #FFF 0,
+        #FFF 80%,
+        transparent 0
+      ), repeating-conic-gradient(
+        transparent 0deg,
+        #000 0deg,
+        #000 2deg,
+        transparent 1deg,
+        transparent 30deg
+      ), radial-gradient(
+        farthest-side circle,
+        #FFF 90%,
+        transparent 0
+      ), repeating-conic-gradient(
+        transparent 0deg,
+        #aaa 0deg,
+        #aaa 1deg,
+        transparent 1deg,
+        transparent 6deg
+      );
 }
 
 /* Grid piles */
@@ -173,6 +201,8 @@ button:focus-visible {
 
 .menu{
     >p{
+        color: red;
+        font-family: sans-serif;
         transform: translateY(1em)
     };
 
@@ -206,3 +236,50 @@ button:focus-visible {
       transparent 6deg
     );
   }
+
+  .menu {
+    width:var(--btn-size);
+    height:var(--btn-size);
+    border-radius:300px;
+    
+    &:before {
+       content:'';
+       position: absolute;
+       width:2px;
+       height:35px;
+       border-radius:2px;
+       background:#444;
+       transform-origin:bottom;
+       animation:time 18s infinite linear;
+       margin-bottom: 35px;
+    }
+    
+     &:after {
+        content:'';
+        position:absolute;
+        width:2px;
+        height:40px;
+        border-radius:5px;
+        background:rgb(116, 0, 0);
+        transform-origin:bottom;    
+        animation:time 1.2s infinite linear;
+        margin-bottom: 40px;
+     }
+ }
+ 
+ .hours {
+    position:absolute;
+    width: 3px;
+    height: 20px;
+    border-radius:5px;
+    background:#444;
+    transform-origin:bottom;
+    animation:time 4320s infinite linear;
+    margin-bottom: 20px;
+ }
+ 
+ @keyframes time {
+    100% {
+       transform:rotate(360deg);
+    }
+ }
