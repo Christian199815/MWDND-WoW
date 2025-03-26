@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="quycss">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Women in Tech</h1>
+  <label for="period-select">Select Period:
+    <div class="menu">
+      <button class="menu-toggle" style="anchor-name: --menu-toggle" popovertarget="menu-items">
+      </button>
+      <ul class="menu-items" id="menu-items" popover style="position-anchor: --menu-toggle" role="menu">
+        <li class="item">
+          <button>
+            <span aria-hidden="true">All periods</span>
+          </button>
+        </li>
+        <li class="item">
+          <button>
+            <span>way back</span>
+          </button>
+        </li>
+        <li class="item">
+          <button>
+            <span>web talent</span>
+          </button>
+        </li>
+        <li class="item">
+          <button>
+            <span>web weirdness</span>
+          </button>
+        </li>
+        <li class="item">
+          <button>
+            <span>web maturity</span>
+          </button>
+        </li>
+        <li class="item">
+          <button>
+            <span>web pioneer</span>
+          </button>
+        </li>
+        <li class="item">
+          <button popovertargetaction="hide" popovertarget="menu-items" class="hidden-close">
+          </button>
+        </li>
+      </ul>
+    </div>
+  </label>
+  <label for="period-select">Select Continent:
+  </label>
+  <section id="board">
+    <button popovertarget="continent-popover" data-continent="Africa">Africa</button>
+    <button popovertarget="continent-popover" data-continent="Asia">Asia</button>
+    <button popovertarget="continent-popover" data-continent="Australia">Australia</button>
+    <button popovertarget="continent-popover" data-continent="Europe">Europe</button>
+    <button popovertarget="continent-popover" data-continent="SouthAmerica">South America</button>
+    <button popovertarget="continent-popover" data-continent="NorthAmerica">North America</button>
+  </section>
+  <div id="continent-popover" popover>
+    <button id="close-popover" popovertargetaction="hide" popovertarget="continent-popover">✖</button>
+    <div class="cards-container" id="cards-container"></div>
+  </div>
+
+  <script src="quy.js"></script>
+</body>
+
+</html>
