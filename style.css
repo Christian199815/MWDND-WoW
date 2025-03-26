@@ -111,8 +111,8 @@ body {
             transform-origin: center;
             opacity: 1;
             transform: scale(1);
-            width: 20vw;
-            height: 70vh;
+            width: 16em;
+            height: 35em;
             @container not scroll-state(snapped: x) {
                 interactivity: inert;
                 opacity: .25;
