@@ -1,225 +1,263 @@
-
 @layer StandardBoxes, CustomStyles;
 
+:root {
+  --aspect-ratio-v1: 16;
+  --apsect-ratio-v2: 9;
 
-:root{
-    --aspect-ratio-v1: 16;
-    --apsect-ratio-v2: 9;
+  --board-width: 70dvw;
+  --board-height: calc(var(--board-width) * 0.5625);
 
-    --board-width: 70dvw;
-    --board-height: calc(var(--board-width) * 0.5625);
+  --door-width: 12em;
+  --door-height: calc(100dvh - 20%);
 
-    --door-width: 12em;
-    --door-height: calc(100dvh - 20%);
-  
-    --knob-width: 1em;
-    
-    --glass-width: calc(var(--door-width) - 3em);
-    --glass-height: calc(var(--door-height) - 70%);
+  --knob-width: 1em;
 
-    --continent-hover: yellow;
+  --glass-width: calc(var(--door-width) - 3em);
+  --glass-height: calc(var(--door-height) - 70%);
 
-    --board-color: green;
-    --board-border-1: #9D5322;
-    --board-border-2: #BA825F;
-    --classroom-walls: #F5F5DC;
-    --classroom-floor: #E2D443;
-    --classroom-ceiling: #E0E0E0;
+  --continent-hover: yellow;
 
-    --knob-color: yellow;
-    --knob-boxShadow-color: green;
+  --board-color: #31343a;
+  --board-border-1: #9d5322;
+  --board-border-2: #ba825f;
+  --classroom-walls: #f5f5dc;
+  --classroom-floor: #e2d443;
+  --classroom-ceiling: #e0e0e0;
+  --contintent-color: #fafafa;
 
-    --door-color: #AA6639;
-    --panel-color: maroon;
+  --knob-color: yellow;
+  --knob-boxShadow-color: green;
 
-    --glass-gradient: linear-gradient(135deg, rgba(133,199,233,1) 0%, rgba(177,218,240,1) 18%, rgba(133,199,233,1) 58%, rgba(177,218,240,1) 79%, rgba(133,199,233,1) 100%);
-    --glass-border-1: #fafafa;
-    --glass-border-2: #f4f4f4;
+  --door-color: #aa6639;
+  --panel-color: maroon;
 
+  --glass-gradient: linear-gradient(
+    135deg,
+    rgba(133, 199, 233, 1) 0%,
+    rgba(177, 218, 240, 1) 18%,
+    rgba(133, 199, 233, 1) 58%,
+    rgba(177, 218, 240, 1) 79%,
+    rgba(133, 199, 233, 1) 100%
+  );
+  --glass-border-1: #fafafa;
+  --glass-border-2: #f4f4f4;
+  --board-border: 1.5em;
 
+  --window-width: 28em;
+  --window-height: calc(100dvh - 20%);
+  --window-border-size: 1em;
 
-    --window-width: 28em;
-    --window-height: calc(100dvh - 20%);
-    --window-border-size: 1em;
-    
-    --bigPane-width: calc(var(--window-width)  - calc(var(--window-border-size) * 2) - 2em);
-    --bigPane-height: calc(var(--window-height) - 75%);
-    
-    --smallPane-width: calc(var(--window-width) - 60%);
-    --smallPane-height: calc(var(--window-height) - 50%);
+  --bigPane-width: calc(
+    var(--window-width) - calc(var(--window-border-size) * 2) - 2em
+  );
+  --bigPane-height: calc(var(--window-height) - 75%);
+
+  --smallPane-width: calc(var(--window-width) - 60%);
+  --smallPane-height: calc(var(--window-height) - 50%);
+
+  --b-width: var(--board-width);
+  --b-height: var(--board-height);
+  --t-min: 1.5em;
+  --t-height: calc(var(--b-height) + var(--t-min) + var(--board-border));
+  --ring-width: 3em;
+  --ring-color: rgb(152, 152, 152);
+
+  --handle-cord-width: 1em;
+  --handle-cord-height: 3em;
+  --extended-cord-height: 7.5em; /* Explicitly define extended height */
+
+  --open-speed: 1000ms;
+  --pull-speed: 300ms;
+  --shutter-delay: 100ms;
 }
-  #board{
-    width: var(--board-width);
-    height: var(--board-height);
 
-    
-    background-color: var(--board-color);
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  margin: 0;
+  background-color: #222;
+  font-family: Arial, sans-serif;
 
-    border: 1.5em solid var(--board-border-1);
-    border-style: outset;
-    border-color: var(--board-border-1) var(--board-border-2) ;
-    position: relative;
+  overflow: hidden;
+}
 
+@layer StandardBoxes {
+    body,
+    body * {
+      transform-style: preserve-3d;
+    }
+  
+    div:first-of-type {
+      perspective: 1000px;
+      perspective-origin: center center;
+    }
+  
+    .box-container:nth-of-type(1) {
+      --x-size: 100vw;
+      --y-size: 100dvh;
+      /* --y-size: calc(var(--x-size) * 0.5625); */
+      --z-size: 20em;
+      --hue: 220;
+  
+      transform-origin: center center;
+      /*   transform: translateZ(20em) rotateX(-30deg) translateZ(20em); */
+    }
+  
+    .box {
+      width: var(--x-size);
+      height: var(--y-size);
+  
+      position: relative;
+      transform-style: preserve-3d;
+      transform-origin: bottom center;
+    }
+  
+    .face {
+      position: absolute;
+      transform-style: preserve-3d;
+      background-color: hsl(var(--hue), 100%, var(--lightness));
+      opacity: 0.6;
+    }
+  
+    .face.front,
+    .face.back {
+      width: var(--x-size);
+      height: var(--y-size);
+    }
+  
+    .face.bottom,
+    .face.top {
+      width: var(--x-size);
+      height: var(--z-size);
+    }
+  
+    /* Side faces should match the depth */
+    .face.left,
+    .face.right {
+      width: var(--z-size);
+      height: var(--y-size);
+    }
+  
+    .face.front {
+      --lightness: 66%;
+      display: none;
+    }
+  
+    .face.back {
+      transform-origin: center bottom;
+  
+      transform: rotateX(180deg) translateZ(var(--z-size)) rotateX(180deg);
+      --lightness: 62%;
+    }
+  
+    .face.bottom {
+      bottom: 0;
+      transform-origin: bottom;
+      transform: rotateX(-90deg) translateY(var(--z-size));
+      --lightness: 72%;
+    }
+  
+    .face.top {
+      bottom: 100%;
+      transform-origin: bottom;
+      transform: rotateX(90deg);
+      --lightness: 74%;
+    }
+  
+    .face.right {
+      left: var(--x-size);
+      bottom: 0;
+      transform-origin: left bottom;
+      transform: rotateY(90deg);
+      --lightness: 70%;
+    }
+  
+    .face.left {
+      right: var(--x-size);
+      bottom: 0;
+      transform-origin: right bottom;
+      transform: rotateY(-90deg);
+      --lightness: 70%;
+      /* background-image: url("doc-images/box1.png"); */
+    }
+  
+    /* Add display flex to top face to center joystick */
+    .face.top {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+    }
   }
-
-  #board > svg path:hover{
-    fill: var(--continent-hover);
-    
-  }
-
-  #board > svg{
-    width: 110%;
-    height: 110%;
-    position: absolute;
-    bottom: calc((var(--board-height) - 90%) * -1);
-  }
-
-
-  :root:has(#board > svg path:active){
-    body{
-        background-color: yellow;
+  
+  @layer CustomStyles {
+    .face {
+      background-color: var(--classroom-walls);
+    }
+  
+    .face.back {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      position: relative;
+    }
+  
+    .face.left {
+    }
+  
+    .face.top {
+      background-color: var(--classroom-ceiling);
+    }
+  
+    .face.bottom {
+      background-color: var(--classroom-floor);
     }
   }
 
-  
+/* #region Classroom Styling */
+
+#board {
+  width: var(--board-width);
+  height: var(--board-height);
+
+  background-color: var(--board-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: var(--board-border) solid var(--board-border-1);
+  border-style: outset;
+  border-color: var(--board-border-1) var(--board-border-2);
+  position: relative;
+}
+
+#board > svg path{
+    fill: var(--contintent-color);
+}
+
+#board > svg path:hover {
+  fill: var(--continent-hover);
+}
+
+#board > svg {
+  width: 110%;
+  height: 110%;
+  position: absolute;
+  bottom: calc((var(--board-height) - 90%) * -1);
+}
+
+:root:has(#board > svg path:active) {
   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100dvh;
-  
-    position: relative;
-    margin: 0;
-    background-color: #222;
-    font-family: Arial, sans-serif;
-    
-    overflow: hidden;
-  
-  }
-
-  @layer StandardBoxes {
-
-  body, body *{
-    transform-style: preserve-3d;
-  }
-  
-  div:first-of-type{
-    perspective: 1000px;
-    perspective-origin: center center;
-    
-  }
-  
-  
-  .box-container:nth-of-type(1){
-    --x-size: 100vw;
-    --y-size: 100dvh;
-    /* --y-size: calc(var(--x-size) * 0.5625); */
-    --z-size: 20em;
-    --hue: 220;
-
-    transform-origin: center center;
-  /*   transform: translateZ(20em) rotateX(-30deg) translateZ(20em); */
-  }
-  
-  .box {
-    width: var(--x-size);
-    height: var(--y-size);
-  
-    position: relative;
-    transform-style: preserve-3d;
-    transform-origin: bottom center;
-  }
-  
-  .face {
-    position: absolute;
-    transform-style: preserve-3d;
-    background-color: hsl(var(--hue), 100%, var(--lightness));
-    opacity: .6;
-  }
-  
-  
-  
-  .face.front,
-  .face.back {
-    width: var(--x-size);
-    height: var(--y-size);
-  }
-  
-  .face.bottom,
-  .face.top {
-    width: var(--x-size);
-    height: var(--z-size);
-  }
-  
-  /* Side faces should match the depth */
-  .face.left,
-  .face.right {
-    width: var(--z-size);
-    height: var(--y-size);
-  }
-  
-  .face.front {
-    --lightness: 66%;
-    display: none;
-  }
-  
-  .face.back {
-    transform-origin: center bottom;
-  
-    transform: rotateX(180deg) translateZ(var(--z-size))  rotateX(180deg);
-    --lightness: 62%;
-    
-    
-  }
-  
-  .face.bottom {
-    bottom: 0;
-    transform-origin: bottom;
-    transform: rotateX(-90deg) translateY(var(--z-size));
-    --lightness: 72%;
-    
-  }
-  
-  .face.top {
-    bottom: 100%;
-    transform-origin: bottom;
-    transform: rotateX(90deg);
-    --lightness: 74%;
-    
-  }
-  
-  .face.right {
-    left: var(--x-size);
-    bottom: 0;
-    transform-origin: left bottom;
-    transform: rotateY(90deg);
-    --lightness: 70%;
-  }
-  
-  .face.left {
-    right: var(--x-size);
-    bottom: 0;
-    transform-origin: right bottom;
-    transform: rotateY(-90deg);
-    --lightness: 70%;
-    /* background-image: url("doc-images/box1.png"); */
-  }
-  
-  /* Add display flex to top face to center joystick */
-  .face.top {
-    display: flex;
-    justify-content: center;
-    align-items: end;
+    background-color: yellow;
   }
 }
-  
 
-
-  .door {
+.door {
     width: var(--door-width);
     height: var(--door-height);
   
@@ -229,7 +267,6 @@
     bottom: 0;
     right: 20%;
   }
-  
   
   .knob {
     border-radius: 100%;
@@ -241,108 +278,184 @@
     position: absolute;
     top: calc((var(--door-height) / 2) - (var(--knob-width) / 2));
     left: 10px;
-    
+  
     box-shadow: 0px 0px 6px 4px var(--knob-boxShadow-color);
-    
   }
   
-  .glass{
-  width: var(--glass-width);
+  .glass {
+    width: var(--glass-width);
     height: var(--glass-height);
-    
+  
     background-image: var(--glass-gradient);
-    
+  
     position: absolute;
     left: calc((var(--door-width) / 2) - (var(--glass-width) / 2));
     top: calc((var(--door-height) / 4) - (var(--glass-height) / 2));
-    
-     border: .5em solid var(--board-border-1);
+  
+    border: 0.5em solid var(--board-border-1);
     border-style: outset;
     border-color: var(--board-border-1) var(--board-border-2);
   }
   
-  .panel{
+  .panel {
     width: var(--glass-width);
     height: var(--glass-height);
-    
+  
     background-color: var(--panel-color);
-    
+  
     position: absolute;
     left: calc((var(--door-width) / 2) - (var(--glass-width) / 2));
     bottom: calc((var(--door-height) / 4) - (var(--glass-height) / 2));
-    
-    border: .5em solid var(--board-border-1);
+  
+    border: 0.5em solid var(--board-border-1);
     border-style: outset;
     border-color: var(--board-border-1) var(--board-border-2);
   }
   
-
-
-  .window{
-    position: relative;
+  .window {
+    position: absolute;
+    top: 10%;
     width: var(--window-width);
     height: var(--window-height);
-    
+  
     background-color: white;
-    
   }
   
-  .bigPane{
+  .bigPane {
     position: absolute;
-  width: var(--bigPane-width);
+    width: var(--bigPane-width);
     height: var(--bigPane-height);
     left: calc(var(--window-border-size));
     top: 2.5%;
-    
+  
     background-image: var(--glass-gradient);
-    
-      border: 1em solid var(--glass-border-1);
+  
+    border: 1em solid var(--glass-border-1);
     border-style: outset;
     border-color: var(--glass-border-1) var(--glass-border-2);
   }
   
-  .smallPane{
+  .smallPane {
     position: absolute;
     width: var(--smallPane-width);
     height: var(--smallPane-height);
-    
+  
     bottom: 2.5%;
-    
-     background-image: var(--glass-gradient);
-
-     border: 1em solid var(--glass-border-1);
-     border-style: outset;
-     border-color: var(--glass-border-1) var(--glass-border-2);
+  
+    background-image: var(--glass-gradient);
+  
+    border: 1em solid var(--glass-border-1);
+    border-style: outset;
+    border-color: var(--glass-border-1) var(--glass-border-2);
   }
   
-  .window div:nth-child(2)){
+  .window div:nth-child(2) {
     left: var(--border-size);
   }
   
-  .window div:nth-child(3){
-      right: var(--window-border-size);
+  .window div:nth-child(3) {
+    right: var(--window-border-size);
   }
+  
 
+/* #endregion */
 
-@layer CustomStyles{
-    .face{
-        background-color: var(--classroom-walls);
-    }
+/* #region Shutter */
 
-    .face.back{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.shutter {
+  width: var(--b-width);
+  height: var(--t-min);
 
-    .face.top{
-        background-color: var(--classroom-ceiling);
-    }
+  position: absolute;
+  top: calc((var(--t-min) + var(--board-border)) * -1);
 
-    .face.bottom{
-        background-color: var(--classroom-floor);
-    }
+  transition: height var(--open-speed);
+  transition-delay: var(--shutter-delay);
+
+  background-color: green;
+  border-radius: 25px 25px 0 0;
 }
 
+/* Cover logo */
+.shutter img {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--open-speed);
+  transition-delay: var(--shutter-delay);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-  
+/* Handle container */
+.handle {
+  position: absolute;
+  left: calc((var(--b-width) / 2) - (var(--ring-width) / 2));
+  bottom: 0; /* Attach to bottom of shutter */
+  z-index: 10;
+}
+
+/* Cord */
+.handle div {
+  width: var(--handle-cord-width);
+  height: var(--handle-cord-height);
+  position: absolute;
+  left: calc((var(--ring-width) / 2) - (var(--handle-cord-width) / 2));
+  top: 0; /* Start at the bottom of the shutter */
+  background-color: yellow;
+  transform-origin: top;
+
+  /* Transition for extending and retracting */
+  transition-property: height;
+  transition-duration: var(--pull-speed), var(--open-speed);
+  transition-delay: 0s, var(--shutter-delay);
+}
+
+/* Ring */
+.handle input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: var(--ring-width);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 10px solid var(--ring-color);
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: var(--handle-cord-height); /* Position at bottom of cord */
+  left: 0;
+
+  /* Transition for moving up and down with cord */
+  transition-property: transform;
+  transition-duration: var(--pull-speed), var(--open-speed);
+  transition-delay: 0s, var(--shutter-delay);
+}
+
+/* When checked, extend cord in first phase */
+body:has(.shutter input:checked) .handle div {
+  height: var(--extended-cord-height);
+}
+
+/* When checked, move ring down in first phase */
+body:has(.shutter input:checked) .handle input {
+  transform: translateY(
+    calc(var(--extended-cord-height) - var(--handle-cord-height))
+  );
+}
+
+/* When checked, open shutter after delay */
+body:has(.shutter input:checked) .shutter {
+  height: var(--t-height);
+}
+
+/* When checked, show image after delay */
+body:has(.shutter input:checked) .shutter img {
+  opacity: 1;
+}
+
+/* #endregion */
+
+
