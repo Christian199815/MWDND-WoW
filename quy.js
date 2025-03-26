@@ -20,7 +20,7 @@ fetch(baseURL + endpoint)
     const WomenInTech = data.data;
     const container = document.getElementById('cards-container');
     const periodButtons = document.querySelectorAll('.menu-items .item button');
-    const menuToggleButton = document.querySelector('.menu-toggle');
+    const menuToggleButton = document.querySelector('.menu p');
     const continentButtons = document.querySelectorAll('#board button');
     const popoverMenu = document.getElementById('menu-items');
 
