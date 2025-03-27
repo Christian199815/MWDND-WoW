@@ -1,11 +1,14 @@
+// popoverOpener.js
+import { filterData, selectedContinent, showAllContinents } from './cardFiller.js';
+
 // Get all continent links in the SVG
 const continentLinks = document.querySelectorAll("#board svg a");
 
 // Get the popover element
 const popover = document.getElementById("continent-popover");
 
-// Get the show all link - change from button to link selector
-const showAllLink = document.getElementById("show-all-button");
+// Get the show all link
+const showAllLink = document.querySelector(".show-all-button");
 
 // Add some basic styling if the popover attribute isn't supported
 if (!HTMLElement.prototype.togglePopover) {
@@ -58,41 +61,34 @@ continentLinks.forEach((link) => {
     const continentId = continentGroup ? continentGroup.id : "";
     console.log("Clicked continent:", continentId);
 
-    // Set selected continent for filtering
+    // Set selected continent for filtering (using imported variable)
     selectedContinent = event.currentTarget.getAttribute('data-continent').trim();
-    filterData();
+    filterData(); // Using imported function
   });
 });
 
 // Add show all link functionality
 if (showAllLink) {
-  // Prevent navigation
-  showAllLink.setAttribute("href", "javascript:void(0)");
-  
   showAllLink.addEventListener("click", function (event) {
     event.preventDefault();
-    
-    // Show the popover same as when clicking a continent
     showPopover(event);
     
-    // Clear the continent filter
-    selectedContinent = "";
-    filterData();
-    
-    console.log("Showing all continents");
+    console.log("Show all button clicked");
+    showAllContinents(); // Using imported function
   });
 }
 
 // Close button functionality
-document
-  .getElementById("close-popover")
-  .addEventListener("click", hidePopover);
+const closeButton = document.getElementById("close-popover");
+if (closeButton) {
+  closeButton.addEventListener("click", hidePopover);
+}
 
 // Close when clicking outside (optional)
 document.addEventListener("click", function (event) {
   if (
     !popover.contains(event.target) &&
-    !event.target.closest(".shutter svg") &&
+    !event.target.closest("#board svg") &&
     event.target !== showAllLink
   ) {
     hidePopover();

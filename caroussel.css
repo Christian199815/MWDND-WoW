@@ -1,0 +1,174 @@
+
+.plus-jakarta-sans-thin {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+.plus-jakarta-sans-regular {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .plus-jakarta-sans-medium {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+  .plus-jakarta-sans-bold {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+  .plus-jakarta-sans-extraBold {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+body {
+    font-family:"Plus Jakarta Sans", Helvetica, sans-serif;
+    --CardWidth: 16em;
+    --CardPadding: 1em;
+}
+
+.slider-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.slider {
+    margin: 0 5em ;
+    /* padding: 1.5em calc(50dvw - 6.5em) 1.5em calc(50dvw - 6.5em); */
+    width: calc(var(--CardWidth) * 2.8);
+    padding: 1.5em 6.5em;
+    position: relative;
+    display: flex;
+    transition: transform 0.5s ease;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    max-height: 90%;
+
+    &::scroll-button(*) {
+        position: fixed;
+        font-family: "Material Symbols Outlined";
+        border-radius:50% ;
+        padding: 1em 1.2em;
+        margin: 0 .5em ;
+        outline: .1em solid rgb(59, 59, 152) ;
+        background-color: white;
+    }
+
+    &::scroll-button(inline-start) {
+        content: "⬅" / "previous";
+        position: absolute;
+        top: 40%;
+        left: 5%;
+    }
+
+    &::scroll-button(inline-end) {
+        content: "⮕" / "Next";
+        position: absolute;
+        top: 40%;
+        right: 5%;
+    }
+
+    &::scroll-button(*)::focus-visible {
+        outline-offset: 1em;
+    }
+
+    .card {
+        container-type: scroll-state;
+        list-style: none;
+        scroll-snap-align: center;
+        scroll-snap-stop:always;
+        scroll-behavior: smooth;
+
+        >div {
+            padding: var(--CardPadding);
+            border-radius: 8px;
+            background-color: white;
+    
+            display: grid;
+            grid-template-rows: 30vh 4vh max-content 5vh;
+            text-align: start;
+            box-shadow: .1em .1em .5em rgb(203, 203, 203);
+            transition: transform 0.5s ease, opacity 0.3s ease;
+            transform-origin: center;
+            opacity: 1;
+            transform: scale(1);
+            width: var(--CardWidth);
+            height: fit-content;
+            @container not scroll-state(snapped: x) {
+                interactivity: inert;
+                transform: scale(.7);
+    
+            }
+            >div{
+                display: flex;
+                justify-content: space-around;
+            }
+
+        }
+    }
+}
+
+
+
+.card img {
+    margin: 0;
+    width: 100%; /* Zorgt ervoor dat de afbeelding de volledige breedte van het element inneemt */
+    height: 100%; /* Zorgt ervoor dat de afbeelding de volledige hoogte van de eerste rij inneemt */
+    object-fit: cover; /* Zorgt ervoor dat de afbeelding de ruimte volledig vult zonder te vervormen */
+}
+
+.card h2 {
+    margin: .5em 0;
+    font-size: 1em;
+    hyphens: auto;
+    font-style: italic;
+    font-weight: 100;
+    margin-left: .5em;
+    align-self: center;
+}
+
+.card p {
+    font-size: 1.3em 0;
+    align-self: center;
+
+    /* margin: .5em; */
+}
+
+.card p:first-of-type{
+    font-size: 1.7em;
+    font-style: italic;
+    padding: 0;
+    margin: .5em 0;
+}
+.card p:nth-child(5)::before{
+    content: '📍';
+}
+.card p:nth-child(5)::first-line{
+    font-weight: 700;
+}
+
+.card a{
+    font-weight: 600;
+    color: rgb(36, 36, 36);
+    align-self: center;
+}
+
+.card a:visited{
+    color: rgb(36, 36, 36);
+}

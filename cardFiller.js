@@ -1,3 +1,13 @@
+// data.js - Main script with exports
+
+// Export these at the top level so they can be imported elsewhere
+export let WomenInTech = [];
+export let selectedPeriod = "All periods";
+export let selectedContinent = "";
+export let displayCards;
+export let filterData;
+export let showAllContinents;
+
 const baseURL = 'https://fdnd.directus.app/';
 const endpoint = 'items/women_in_tech';
 
@@ -17,14 +27,14 @@ const continents = {
 fetch(baseURL + endpoint)
   .then(response => response.json())
   .then(data => {
-    const WomenInTech = data.data;
+    WomenInTech = data.data;
     const container = document.getElementById('slider');
     const periodButtons = document.querySelectorAll('.menu-items .item button');
     const menuToggleButton = document.querySelector('.menu p');
     const continentButtons = document.querySelectorAll('#board button');
     const popoverMenu = document.getElementById('menu-items');
     const continentLinks = document.querySelectorAll('#board svg a');
-    const showAllButton = document.querySelector('.show-all-button'); // Assuming you'll add this element
+    const showAllButton = document.querySelector('.show-all-button');
 
     // Standaardtekst instellen menu button
     menuToggleButton.textContent = "All periods";
@@ -44,14 +54,17 @@ fetch(baseURL + endpoint)
       person.continent = getContinent(person.country);
     });
 
+    // Define these functions after fetch so they have access to the data
+    // But assign them to the exported variables so they're accessible from other files
+
     // Function to show all data from all continents
-    const showAllContinents = () => {
+    showAllContinents = () => {
       selectedContinent = ""; // Clear the continent filter
       filterData(); // Apply filters (which will now show all continents)
     };
 
     // Kaarten weergeven
-    const displayCards = (filteredData) => {
+    displayCards = (filteredData) => {
       container.innerHTML = filteredData.map(person => `
                 <li class="card">
                     <div>
@@ -71,10 +84,7 @@ fetch(baseURL + endpoint)
     };
 
     // Filterfunctie
-    let selectedPeriod = "All periods";
-    let selectedContinent = "";
-
-    const filterData = () => {
+    filterData = () => {
       let filteredData = WomenInTech;
 
       if (selectedPeriod !== "All periods") {
@@ -107,8 +117,6 @@ fetch(baseURL + endpoint)
       });
     }
 
-
-
     continentLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault(); // Prevent default navigation behavior
@@ -118,5 +126,6 @@ fetch(baseURL + endpoint)
       });
     });
 
-    // displayCards(WomenInTech);
+    // Display all data initially
+    displayCards(WomenInTech);
   });

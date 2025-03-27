@@ -1,0 +1,82 @@
+
+.menu {
+    --minute-rotation: 0deg;
+    --second-rotation: 0deg;
+    
+    >p {
+      color: red;
+      font-family: sans-serif;
+      transform: translateY(1em)
+    }
+  
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    width: var(--btn-size);
+    aspect-ratio: 1;
+    border: solid 3px black;
+    background-image: radial-gradient(
+      farthest-side circle,
+      #000 8%,
+      #FFF 0,
+      #FFF 80%,
+      transparent 0
+    ), repeating-conic-gradient(
+      transparent 0deg,
+      #000 0deg,
+      #000 2deg,
+      transparent 1deg,
+      transparent 30deg
+    ), radial-gradient(
+      farthest-side circle,
+      #FFF 90%,
+      transparent 0
+    ), repeating-conic-gradient(
+      transparent 0deg,
+      #aaa 0deg,
+      #aaa 1deg,
+      transparent 1deg,
+      transparent 6deg
+    );
+    
+    width: var(--btn-size);
+    height: var(--btn-size);
+    border-radius: 300px;
+    position: relative;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 35px;
+      border-radius: 2px;
+      background: #444;
+      transform-origin: bottom;
+      transform: rotate(var(--second-rotation));
+      margin-bottom: 35px;
+    }
+    
+    &:after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 40px;
+      border-radius: 5px;
+      background: rgb(116, 0, 0);
+      transform-origin: bottom;
+      transform: rotate(var(--minute-rotation));
+      margin-bottom: 40px;
+    }
+  }
+  
+  .hours {
+    position: absolute;
+    width: 3px;
+    height: 20px;
+    border-radius: 5px;
+    background: #444;
+    transform-origin: bottom;
+    margin-bottom: 20px;
+    /* No animation here, will be controlled by JavaScript */
+  }
+  
