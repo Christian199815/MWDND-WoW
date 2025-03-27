@@ -481,3 +481,18 @@ body:has(.shutter input:checked) .shutter svg {
 }
 
 /* #endregion */
+
+
+#board{
+  color: white;
+  position: relative;
+}
+
+#board #tutorial{
+  text-align: center;
+  font-size: 2.2dvw;
+
+  position: absolute;
+  bottom: 0;
+
+}
