@@ -183,18 +183,6 @@ button:focus-visible {
 }
 
 /* //================================// */
-/* //==========popover===========// */
-/* //================================// */
-
-#continent-popover {
-    width: 80%;
-    height: 90%;
-    background: transparent;
-    border: 0;
-    overflow-y:hidden;
-}
-
-/* //================================// */
 /* //==========clock===========// */
 /* //================================// */
 
@@ -284,6 +272,22 @@ button:focus-visible {
  }
 
  /* //================================// */
+/* //==========popover===========// */
+/* //================================// */
+
+#continent-popover {
+    width: 100%;
+    height: 90%;
+    background: transparent;
+    border: 0;
+    overflow-y:hidden;
+
+    &::backdrop{
+        background-color: rgba(150, 150, 150, 0.178);  
+    }
+}
+
+ /* //================================// */
 /* //==========carousel===========// */
 /* //================================// */
 
@@ -321,28 +325,32 @@ button:focus-visible {
 
 body {
     font-family:"Plus Jakarta Sans", Helvetica, sans-serif;
+    --CardWidth: 16em;
+    --CardPadding: 1em;
 }
 
 .slider-container {
+    display: flex;
+    justify-content: center;
     position: relative;
     width: 100%;
     height: 100%;
-    margin: 2em auto;
     perspective: 1000px;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .slider {
     margin: 0 5em ;
-    padding: 1.5em calc(50dvw - 6.5em) 1.5em calc(50dvw - 6.5em);
+    /* padding: 1.5em calc(50dvw - 6.5em) 1.5em calc(50dvw - 6.5em); */
+    width: calc(var(--CardWidth) * 2.8);
+    padding: 1.5em 6.5em;
     position: relative;
     display: flex;
     transition: transform 0.5s ease;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-   
-
+    max-height: 90%;
 
     &::scroll-button(*) {
         position: fixed;
@@ -358,15 +366,14 @@ body {
         content: "⬅" / "previous";
         position: absolute;
         top: 40%;
-        left: 1em;
-
+        left: 5%;
     }
 
     &::scroll-button(inline-end) {
         content: "⮕" / "Next";
         position: absolute;
         top: 40%;
-        right: 1em;
+        right: 5%;
     }
 
     &::scroll-button(*)::focus-visible {
@@ -380,30 +387,23 @@ body {
         scroll-snap-stop:always;
         scroll-behavior: smooth;
 
-    
-       
-
         >div {
-            padding: 1em;
-            border-radius: .5em;
+            padding: var(--CardPadding);
+            border-radius: 8px;
             background-color: white;
     
-            /* display: flex;
-            flex-direction: column; */
             display: grid;
             grid-template-rows: 30vh 4vh max-content 5vh;
             text-align: start;
-            border-radius: .5em;
             box-shadow: .1em .1em .5em rgb(203, 203, 203);
             transition: transform 0.5s ease, opacity 0.3s ease;
             transform-origin: center;
             opacity: 1;
             transform: scale(1);
-            width: 16em;
+            width: var(--CardWidth);
             height: fit-content;
             @container not scroll-state(snapped: x) {
                 interactivity: inert;
-                opacity: .25;
                 transform: scale(.7);
     
             }
