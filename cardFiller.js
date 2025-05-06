@@ -63,26 +63,26 @@ fetch(baseURL + endpoint)
       filterData(); // Apply filters (which will now show all continents)
     };
 
-    // Kaarten weergeven
-    displayCards = (filteredData) => {
-      container.innerHTML = filteredData.map(person => `
-                <li class="card">
-                    <div>
-                        <img src="https://fdnd.directus.app/assets/${person.image}" alt="${person.name}">
-                        <h2>${person.name}</h2>
-                        <p>"${person.tagline}"</p>
-                        <p>Period: ${person.period}</p>
-                        <p>Based: ${person.country}</p>
-                        <div>
-                        <a href="${person.website}" target="_blank">Website</a>
-                        ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
-                        ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
-                        </div>
-                    <div>
-                </li>
-            `).join('');
-    };
-
+    // // Kaarten weergeven
+    // displayCards = (filteredData) => {
+    //   container.innerHTML = filteredData.map(person => `
+    //     <li class="card">
+    //       <div style="background-image: url('https://fdnd.directus.app/assets/${person.image}'); background-size: cover; background-position: center;">
+    //       <div>
+    //         <h2>${person.name}</h2>
+    //         <div>
+    //           <a href="${person.website}" target="_blank">Website</a>
+    //           ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
+    //           ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
+    //         </div>
+    //       </div>
+    //       <p>Based: ${person.country}</p>
+    //       <p>"${person.tagline}"</p>  
+    //       </div>
+    //     </li>
+    //   `).join('');
+    // };
+    
     // Filterfunctie
     filterData = () => {
       let filteredData = WomenInTech;

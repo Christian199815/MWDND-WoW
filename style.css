@@ -59,8 +59,8 @@ body {
     &::scroll-button(*) {
         position: fixed;
         font-family: "Material Symbols Outlined";
-        border-radius:50% ;
-        padding: 1em 1.2em;
+        border-radius:.2em ;
+        padding: .5em .7em;
         margin: 0 .5em ;
         outline: .1em solid rgb(59, 59, 152) ;
         background-color: white;
@@ -71,6 +71,7 @@ body {
         position: absolute;
         top: 40%;
         left: 1em;
+
 
     }
 
@@ -84,6 +85,12 @@ body {
     &::scroll-button(*)::focus-visible {
         outline-offset: 1em;
     }
+    
+    &::scroll-button(*):disabled{
+        background-color: rgb(170, 170, 170);
+        border:.2em solid rgb(170, 170, 170);
+        outline: none;
+    }
 
     .card {
         container-type: scroll-state;
@@ -96,48 +103,97 @@ body {
        
 
         >div {
+            position: relative;
+            background-size: cover;
+            background-position: center;
             padding: 1em;
-            border-radius: .5em;
-            background-color: var(--white);
+            overflow: hidden;
     
-            /* display: flex;
-            flex-direction: column; */
-            display: grid;
-            grid-template-rows: 30vh 4vh max-content 5vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
             text-align: start;
-            border-radius: .5em;
-            box-shadow: .1em .1em .5em rgb(203, 203, 203);
+            border-radius: 2em;
+            box-shadow: 0 0 1em rgb(104, 106, 146);
             transition: transform 0.5s ease, opacity 0.3s ease;
             transform-origin: center;
             opacity: 1;
             transform: scale(1);
-            width: 16em;
+            width: 19em;
             height: 35em;
             @container not scroll-state(snapped: x) {
                 interactivity: inert;
                 opacity: .25;
                 transform: scale(.7);
-    
             }
-            >div{
+            >div:nth-of-type(1){
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
+                align-items: flex-start; 
+                >h2{
+                    margin: 0;
+                    padding: .4em;
+                    width: 80%;
+                }
+
             }
+            >div:nth-of-type(2){
+                align-items: flex-end;
+            }
+        
+            
 
         }
+          
     }
 }
+  .card > div > * {
+    position: relative;
+    z-index: 1;
+  }
+
+.card .links {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;  /* zorgt dat items rechts uitgelijnd zijn */
+    text-align: right;
+    gap: 0.3em;
+  }
+  
+  .card:hover .links {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .card-inner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    color: white; /* altijd leesbaar nu */
+    text-shadow: .1em .1em .5em rgba(0,0,0,1);
+    overflow: hidden;
+  }
+  
+  .card-inner .overlay {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* donkere overlay met transparantie */
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .card-inner > *:not(.overlay) {
+    position: relative;
+    z-index: 1;
+  }
 
 
-
-.card img {
-    margin: 0;
-    width: 100%; /* Zorgt ervoor dat de afbeelding de volledige breedte van het element inneemt */
-    height: 100%; /* Zorgt ervoor dat de afbeelding de volledige hoogte van de eerste rij inneemt */
-    object-fit: cover; /* Zorgt ervoor dat de afbeelding de ruimte volledig vult zonder te vervormen */
-}
-
-.card h2 {
+/* .card h2 {
     margin: .5em 0;
     font-size: 1em;
     hyphens: auto;
@@ -145,34 +201,21 @@ body {
     font-weight: 100;
     margin-left: .5em;
     align-self: center;
-}
-
-.card p {
-    font-size: 1.3em 0;
-    align-self: center;
-
-    /* margin: .5em; */
-}
-
+} */
 .card p:first-of-type{
     font-size: 1.7em;
     font-style: italic;
     padding: 0;
-    margin: .5em 0;
 }
-.card p:nth-child(5)::before{
-    content: '📍';
-}
-.card p:nth-child(5)::first-line{
-    font-weight: 700;
+.card p{
+    margin: 0;
+    padding: .5em 0;
 }
 
 .card a{
-    font-weight: 600;
-    color: rgb(36, 36, 36);
-    align-self: center;
-}
-
-.card a:visited{
-    color: rgb(36, 36, 36);
+    color: white; /* altijd leesbaar nu */
+    text-shadow: 0 0 10px rgba(0,0,0,1);
+    font-size: .8em;
+    font-weight: bold;
+    padding-bottom: .5em;
 }

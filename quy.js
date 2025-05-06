@@ -42,25 +42,25 @@ fetch(baseURL + endpoint)
       person.continent = getContinent(person.country);
     });
 
-    // Kaarten weergeven
-    const displayCards = (filteredData) => {
-      container.innerHTML = filteredData.map(person => `
-                <li class="card">
-                    <div>
-                        <img src="https://fdnd.directus.app/assets/${person.image}" alt="${person.name}">
-                        <h2>${person.name}</h2>
-                        <p>"${person.tagline}"</p>
-                        <p>Period: ${person.period}</p>
-                        <p>Based: ${person.country}</p>
-                        <div>
-                        <a href="${person.website}" target="_blank">Website</a>
-                        ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
-                        ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
-                        </div>
-                    <div>
-                </li>
-            `).join('');
-    };
+    // // Kaarten weergeven
+    // const displayCards = (filteredData) => {
+    //   container.innerHTML = filteredData.map(person => `
+    //             <li class="card">
+    //                 <div>
+    //                     <img src="https://fdnd.directus.app/assets/${person.image}" alt="${person.name}">
+    //                     <h2>${person.name}</h2>
+    //                     <p>"${person.tagline}"</p>
+    //                     <p>Period: ${person.period}</p>
+    //                     <p>Based: ${person.country}</p>
+    //                     <div>
+    //                     <a href="${person.website}" target="_blank">Website</a>
+    //                     ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
+    //                     ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
+    //                     </div>
+    //                 <div>
+    //             </li>
+    //         `).join('');
+    // };
 
     // Filterfunctie
     let selectedPeriod = "All periods";

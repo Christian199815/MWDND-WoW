@@ -52,25 +52,69 @@ fetch(baseURL + endpoint)
             continentSelect.appendChild(option);
         });
 
-        // Functie om kaarten weer te geven
-        const displayCards = (filteredData) => {
-            container.innerHTML = filteredData.map(person => `
+     // Kaarten weergeven
+    //  displayCards = (filteredData) => {
+    //     container.innerHTML = filteredData.map(person => `
+    //       <li class="card">
+    //         <div class="card-inner" style="background-image: url('https://fdnd.directus.app/assets/${person.image}'); opacity:0.6;">
+    //         <div>
+    //           <h2>${person.name}</h2>
+    //           <div class="links">
+    //             <a href="${person.website}" target="_blank">Website</a>
+    //             ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
+    //             ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
+    //           </div>
+    //         </div>
+    //         <div>
+    //         <p>"${person.tagline}"</p>
+    //         <p>Based: ${person.country}</p>
+    //         </div>
+    //         </div>
+    //       </li>
+    //     `).join('');
+    //   };
+
+      
+    displayCards = (filteredData) => {
+        const container = document.getElementById('slider');
+    
+        if (filteredData.length === 0) {
+            container.innerHTML = `
                 <li class="card">
-                    <div>
-                        <img src="https://fdnd.directus.app/assets/${person.image}" alt="${person.name}">
-                        <h2>${person.name}</h2>
-                        <p>"${person.tagline}"</p>
-                        <p>Period: ${person.period}</p>
-                        <p>Based: ${person.country}</p>
-                        <div>
-                        <a href="${person.website}" target="_blank">Website</a>
-                        ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
-                        ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
+                    <div class="card-inner" style="background-image: none; background-color:rgba(45, 41, 41, 0.86);">
+                        <img src="content/yournext.png"> 
+                            <h2>Are you the next one?</h2>
+                            <p>We are IN need of more women in tech</p>
+                            <p>Are you the one we need?</p>
                         </div>
-                    <div>
+                    </div>
                 </li>
-            `).join('');
-        };
+            `;
+            return;
+        }
+    
+        container.innerHTML = filteredData.map(person => `
+            <li class="card">
+                <div class="card-inner" style="background-image: url('https://fdnd.directus.app/assets/${person.image}'); opacity:0.6;">
+                    <div>
+                        <h2>${person.name}</h2>
+                        <div class="links">
+                            <a href="${person.website}" target="_blank">Website</a>
+                            ${person.github ? `<a href="${person.github}" target="_blank">GitHub</a>` : ''}
+                            ${person.codepen ? `<a href="${person.codepen}" target="_blank">CodePen</a>` : ''}
+                        </div>
+                    </div>
+                    <div>
+                        <p>"${person.tagline}"</p>
+                        <p>Based: ${person.country}</p>
+                    </div>
+                </div>
+            </li>
+        `).join('');
+    };
+
+
+
 
         // Filterfunctie
         const filterData = () => {
